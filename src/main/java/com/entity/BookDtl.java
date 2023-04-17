@@ -2,8 +2,8 @@ package com.entity;
 
 public class BookDtl {
 
-    private int bookid;
-    private String bookname;
+    private int bookid ;
+    private String bookname ;
     private String author ;
     private Double price ;
     private String bookCategory ;
@@ -84,6 +84,10 @@ public class BookDtl {
         this.status = status;
         this.photoName = photoName;
         this.email = email;
+    }
+    public BookDtl()
+    {
+        super();
     }
 
     @Override
