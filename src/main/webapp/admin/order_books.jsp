@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
     <title>Title</title>
@@ -13,6 +15,9 @@
 </head>
 <body>
 <%@include file="navbar.jsp"%>
+<c:if test="${empty usobj}">
+    <c:redirect url="../login.jsp" />
+</c:if>
 <div class="container">
     <table class="table table-striped ">
         <thead class="bg-primary text-white">

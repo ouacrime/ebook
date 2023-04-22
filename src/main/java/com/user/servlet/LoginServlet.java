@@ -25,9 +25,12 @@ public class LoginServlet extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
 
-            System.out.println(email + "" + password);
+
 
             if (email.equals("othmaneouacrim@gmail.com") && password.equals("aaaa") ) {
+                us = new User();
+                us.setName("Admin");
+                session.setAttribute("usobj",us);
                 response.sendRedirect("admin/home.jsp");
             }
             else

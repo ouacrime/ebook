@@ -27,6 +27,12 @@
                         <h3 class="text-center text-danger">${failed}</h3>
                         <c:remove var="failed" scope="session"></c:remove>
                     </c:if>
+
+                    <c:if test="${not empty succ}">
+                        <h3 class="text-center text-success">${succ}</h3>
+                        <c:remove var="succ" scope="session"></c:remove>
+                    </c:if>
+
                     <form action="login" method="post">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>

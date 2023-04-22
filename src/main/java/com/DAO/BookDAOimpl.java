@@ -85,4 +85,88 @@ public class BookDAOimpl implements BookDAO {
 
         return listBooks;
     }
+
+    @Override
+    public BookDtl getBookById(int id) {
+        BookDtl book = null;
+        try{
+            String sql = "select * from book_details where bookid=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1,id);
+
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                book = new BookDtl();
+                book.setBookid(rs.getInt(1));
+                book.setBookname(rs.getString(2));
+                book.setAuthor(rs.getString(3));
+                book.setPrice(rs.getDouble(4));
+                book.setBookCategory(rs.getString(5));
+                book.setStatus(rs.getString(6));
+                book.setPhotoName(rs.getString(7));
+                book.setEmail(rs.getString(8));
+
+            }
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+        return book;
+    }
+
+    @Override
+    public boolean updateEditBooks(BookDtl book) {
+        boolean f = false;
+        try
+        {
+            String sql = "update book_details set bookname=?,author=? ,price=? ,status=? where bookid=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,book.getBookname());
+            ps.setString(2,book.getAuthor());
+            ps.setDouble(3,book.getPrice());
+            ps.setString(4,book.getStatus());
+            ps.setInt(5,book.getBookid());
+
+            int i = ps.executeUpdate();
+            if(i==1)
+            {
+                f = true;
+            }
+
+        }
+        catch
+        (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+        return f;
+    }
+
+    @Override
+    public boolean deletBooks(int id) {
+        boolean f = false;
+        try{
+            String sql = "delete from book_details where bookid=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1,id);
+            int i = ps.executeUpdate();
+            if(i == 1)
+            {
+                f = true;
+            }
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return f;
+    }
 }

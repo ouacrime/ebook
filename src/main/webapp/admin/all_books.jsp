@@ -3,14 +3,6 @@
 <%@ page import="com.entity.BookDtl" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.awt.print.Book" %>
-<%--
-
-  Created by IntelliJ IDEA.
-  User: OTHMANE
-  Date: 03/04/2023
-  Time: 20:58
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -19,6 +11,18 @@
 </head>
 <body>
 <%@include file="navbar.jsp"%>
+<c:if test="${empty usobj}">
+    <c:redirect url="../login.jsp" />
+</c:if>
+<c:if test="${not empty succ}">
+    <p class="text-center text-success">${succ}</p>
+    <c:remove var="succ" scope="session"></c:remove>
+</c:if>
+<c:if test="${not empty failed}">
+    <p class="text-center text-danger">${failed}</p>
+    <c:remove var="failed" scope="session"></c:remove>
+</c:if>
+
 <div class="container">
     <table class="table table-striped ">
         <thead class="bg-primary text-white">
@@ -49,8 +53,8 @@
                     <td><%= b.getBookCategory() %></td>
                     <td><%= b.getStatus() %></td>
                     <td>
-                        <a href="#" class="btn btn-sm btn-primary">Edit</a>
-                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                        <a href="edit_books.jsp?id=<%=b.getBookid() %>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i>Edit</a>
+                        <a href="../DeleteBooks?id=<%=b.getBookid()%>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i>Delete</a>
                     </td>
                 </tr>
                 <%

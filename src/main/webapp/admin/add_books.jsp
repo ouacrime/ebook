@@ -21,6 +21,9 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="text-center">Add Books</h4>
+                    <c:if test="${empty usobj}">
+                        <c:redirect url="../login.jsp" />
+                    </c:if>
                     <c:if test="${not empty succ}">
                         <p class="text-center text-success">${succ}</p>
                         <c:remove var="succ" scope="session"></c:remove>
