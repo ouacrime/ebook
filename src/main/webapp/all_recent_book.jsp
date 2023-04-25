@@ -1,6 +1,7 @@
 <%@ page import="com.DAO.BookDAOimpl" %>
 <%@ page import="com.DB.DBConnect" %>
 <%@ page import="com.entity.BookDtl" %>
+<%@ page import="com.entity.User" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,7 +13,9 @@
 </head>
 <body style="background-color: #f0f1f2">
 <%@include file="all_component/navbar.jsp"%>
-    <div class="container" >
+<%User u = (User) session.getAttribute("usobj");%>
+
+<div class="container" >
         <h3 class="text-center">Recent Book</h3>
         <div class="row mb-1">
 
@@ -40,7 +43,17 @@
                         {
                         %>
                         <div class="row ">
-                            <a href="" class="btn btn-danger btn-sm ml-3">Add Cart</a>
+                            <%
+                                if(u == null){
+                            %>
+                            <a href="login.jsp" class="btn btn-primary "><i class="fas fa-cart-plus"></i>Add Cart</a>
+                            <%
+                            }else{
+                            %>
+                            <a href="cart?bid=<%=b1.getBookid()%>&&uid=<%=u.getId()%>" class="btn btn-primary "><i class="fas fa-cart-plus"></i>Add Cart</a>
+                            <%
+                                }
+                            %>
                             <a href="" class="btn btn-success btn-sm ml-1">View Details</a>
                             <a href="" class="btn btn-danger btn-sm ml-1"><%=b1.getPrice()%> </a>
                         </div>

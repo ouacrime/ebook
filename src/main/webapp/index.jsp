@@ -2,6 +2,7 @@
 <%@ page import="com.DB.DBConnect" %>
 <%@ page import="com.entity.BookDtl" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -23,6 +24,9 @@
 </head>
 <body style="background-color: #f7f7f7">
     <%@include file="all_component/navbar.jsp"%>
+
+    <%User u = (User) session.getAttribute("usobj");%>
+
     <div class="container-fluid back-img" >
         <h2 class="text-center text-danger">Ebook Management System</h2>
     </div>
@@ -50,8 +54,18 @@
                                 <p><%=b.getAuthor()%></p>
                                 <p>Categories:<%=b.getBookCategory()%></p>
                                 <div class="row ">
-                                    <a href="" class="btn btn-danger btn-sm ml-3">Add Cart</a>
-                                    <a href="" class="btn btn-success btn-sm ml-1">View Details</a>
+                                    <%
+                                    if(u == null){
+                                    %>
+                                    <a href="login.jsp" class="btn btn-danger btn-sm ml-2">Add Cart</a>
+                                    <%
+                                        }else{
+                                    %>
+                                    <a href="cart?bid=<%=b.getBookid()%>&&uid=<%=u.getId()%>" class="btn btn-danger btn-sm ml-2">Add Cart</a>
+                                    <%
+                                        }
+                                    %>
+                                    <a href="view_books.jsp?bid=<%=b.getBookid()%> " class="btn btn-success btn-sm ml-1">View Details</a>
                                     <a href="" class="btn btn-danger btn-sm ml-1"><%=b.getPrice()%></a>
                                 </div>
                             </div>
@@ -94,15 +108,25 @@
                             if(b1.getBookCategory().equals("Old"))
                         {%>
                         <div class="row ">
-                            <a href="" class="btn btn-success btn-sm ml-4">View Details</a>
+                            <a href="view_books.jsp?bid=<%=b1.getBookid()%> " class="btn btn-success btn-sm ml-4">View Details</a>
                             <a href="" class="btn btn-danger btn-sm ml-1"><%=b1.getPrice()%></a>
                         </div>
                         <%}else
                             {
                         %>
                         <div class="row ">
-                            <a href="" class="btn btn-danger btn-sm ml-3">Add Cart</a>
-                            <a href="" class="btn btn-success btn-sm ml-1">View Details</a>
+                            <%
+                                if(u == null){
+                            %>
+                            <a href="login.jsp" class="btn btn-danger btn-sm ml-2">Add Cart</a>
+                            <%
+                            }else{
+                            %>
+                            <a href="cart?bid=<%=b1.getBookid()%>&&uid=<%=u.getId()%>" class="btn btn-danger btn-sm ml-2">Add Cart</a>
+                            <%
+                                }
+                            %>
+                            <a href="view_books.jsp?bid=<%=b1.getBookid()%>" class="btn btn-success btn-sm ml-1">View Details</a>
                             <a href="" class="btn btn-danger btn-sm ml-1"><%=b1.getPrice()%> </a>
                         </div>
                         <%
@@ -149,7 +173,7 @@
                         <p><%=b2.getAuthor()%></p>
                         <p>Categories:<%=b2.getBookCategory()%></p>
                         <div class="row ">
-                            <a href="" class="btn btn-success btn-sm ml-1">View Details</a>
+                            <a href="view_books.jsp?bid=<%=b2.getBookid()%>" class="btn btn-success btn-sm ml-1">View Details</a>
                             <a href="" class="btn btn-danger btn-sm ml-1"><%=b2.getPrice()%></a>
                         </div>
                     </div>
